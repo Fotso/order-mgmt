@@ -46,30 +46,35 @@ function updateStatus(message) {
     document.getElementById("webserverStatus").innerHTML = message;
 }
 
+
 function updateTable(symbol, bids, asks) {
     var table = document.getElementById(symbol);
     var tbody = table.getElementsByTagName('tbody')[0];
     tbody.innerHTML = '';
 
-    var totalBidVolume = 0;
-    var totalAskVolume = 0;
+    var totalBidVolume = 0.0;
+    var totalAskVolume = 0.0;
+
+    function addRow(price, quantity) {
+        var row = '<tr><td>' + price + '</td><td>' + quantity + '</td></tr>';
+        tbody.innerHTML += row;
+    }
 
     bids.forEach(function(entry) {
-        var price = parseFloat(entry[0]);
-        var quantity = parseFloat(entry[1]);
-        var row = '<tr><td>' + price.toFixed(2) + '</td><td>' + quantity.toFixed(2) + '</td></tr>';
-        tbody.innerHTML += row;
-        totalBidVolume += price * quantity;
+        var price = entry[0];
+        var quantity = entry[1];
+        addRow(price, quantity);
+        totalBidVolume += parseFloat(price) * parseFloat(quantity);
     });
 
     asks.forEach(function(entry) {
-        var price = parseFloat(entry[0]);
-        var quantity = parseFloat(entry[1]);
-        var row = '<tr><td>' + price.toFixed(2) + '</td><td>' + quantity.toFixed(2) + '</td></tr>';
-        tbody.innerHTML += row;
-        totalAskVolume += price * quantity;
+        var price = entry[0];
+        var quantity = entry[1];
+        addRow(price, quantity);
+        totalAskVolume += parseFloat(price) * parseFloat(quantity);
     });
 
     document.getElementById(symbol + '-total-bids').innerText = "Total Bids: " + totalBidVolume.toFixed(2) + " USDT";
     document.getElementById(symbol + '-total-asks').innerText = "Total Asks: " + totalAskVolume.toFixed(2) + " USDT";
 }
+
