@@ -41,6 +41,7 @@ Start/Restart the Tomcat server. You can start Tomcat by running ./bin/startup.s
 
 - Access the application:
 Open a web browser and navigate to **http://localhost:8080/order-mgmt/** to view the application.
+It is also possible to open the deployed version of the application here [https://event-analytica.an.r.appspot.com/](https://event-analytica.an.r.appspot.com/)
 
 
 #### Setting Up and Running the Application in Eclipse
@@ -71,3 +72,4 @@ Open a web browser and navigate to **http://localhost:8080/order-mgmt/** to view
 
 ##### 5. Access the application:
 - Once the server starts, you can access the application by opening a web browser and navigating to http://localhost:8080/order-mgmt/.
+- It is also possible to open the deployed version of the application here [https://event-analytica.an.r.appspot.com/](https://event-analytica.an.r.appspot.com/)
