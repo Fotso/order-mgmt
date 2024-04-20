@@ -8,7 +8,15 @@ function connect() {
     }
 
     var host = document.location.host;
-    var serverUrl = "ws://" + host + "/order-mgmt/websocket";
+	var protocol;
+	
+	if (host === "https://event-analytica.an.r.appspot.com") {
+		protocol = "wss://";
+	} else {
+		protocol = "ws://";
+	}
+	serverUrl = protocol + "//localhost:8080/order-mgmt/websocket";
+	
     wsServer = new WebSocket(serverUrl);
     wsServer.onmessage = function(event) {
         console.log('Received data from Server: ', event.data);
