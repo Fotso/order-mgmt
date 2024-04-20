@@ -10,7 +10,7 @@ function connect() {
     var host = document.location.host;
 	var protocol;
 	
-	if (host === "https://event-analytica.an.r.appspot.com") {
+	if (host.includes("event-analytica.an.r.appspot.com")) {
 		protocol = "wss://";
 	} else {
 		protocol = "ws://";
