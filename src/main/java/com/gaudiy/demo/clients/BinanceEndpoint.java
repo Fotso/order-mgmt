@@ -124,15 +124,19 @@ public class BinanceEndpoint {
 		OrderBook targetBook = stream.contains("btcusdt") ? btcOrderBook : ethOrderBook;
 		long lastUpdateId = stream.contains("btcusdt") ? btcLastUpdateId : ethLastUpdateId;
 
-		if (U > lastUpdateId && u >= lastUpdateId + 1) {
-			targetBook.update(data.getJSONArray("b"), true);
-			targetBook.update(data.getJSONArray("a"), false);
-			if (stream.contains("btcusdt")) {
-				btcLastUpdateId = u;
-			} else if (stream.contains("ethusdt")) {
-				ethLastUpdateId = u;
-			}
+		if (U <= lastUpdateId || u < lastUpdateId + 1) {
+			return;
 		}
+
+		targetBook.update(data.getJSONArray("b"), true);
+		targetBook.update(data.getJSONArray("a"), false);
+
+		if (stream.contains("btcusdt")) {
+			btcLastUpdateId = u;
+		} else if (stream.contains("ethusdt")) {
+			ethLastUpdateId = u;
+		}
+
 	}
 
 	/**

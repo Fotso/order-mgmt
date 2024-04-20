@@ -64,15 +64,17 @@ public class OrderBook {
 	 */
 	public synchronized void update(JSONArray updates, boolean isBids) {
 		NavigableMap<BigDecimal, BigDecimal> book = isBids ? bids : asks;
+
 		for (int i = 0; i < updates.length(); i++) {
 			JSONArray update = updates.getJSONArray(i);
 			BigDecimal price = new BigDecimal(update.getString(0));
 			BigDecimal quantity = new BigDecimal(update.getString(1));
+
 			if (quantity.compareTo(BigDecimal.ZERO) == 0) {
 				book.remove(price);
-			} else {
-				book.put(price, quantity);
+				continue;
 			}
+			book.put(price, quantity);
 		}
 	}
 
